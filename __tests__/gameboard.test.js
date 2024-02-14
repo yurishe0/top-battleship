@@ -23,4 +23,20 @@ describe("gameboard tests", () => {
     it("should prevent from placing out of bounds", () => {
         expect(testGameboard.placeShip(3, 0, 8, "vertical")).toBe("out of bounds")
     })
+
+    it("should receive an attack and send it to the correct ship", () => {
+        testGameboard.placeShip(3, 3, 3, "vertical");
+        expect(testGameboard.receiveAttack([3, 3])).toEqual(1);
+    })
+    it("should be able to tell whether a shot was missed", () => {
+        testGameboard.placeShip(3, 3, 3, "vertical");
+        expect(testGameboard.receiveAttack([7, 7])).toEqual(false);
+    })
+
+    it("should make all attacks to a ship's coordinates refer to one ship", () => {
+        testGameboard.placeShip(3, 3, 3, "vertical");
+        testGameboard.receiveAttack([3, 3]);
+        testGameboard.receiveAttack([3, 5]);
+        expect(testGameboard.receiveAttack([3, 4])).toEqual(3);
+    })
 })

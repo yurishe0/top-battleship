@@ -26,6 +26,12 @@ export class Gameboard {
             }
         }
     }
+
+    receiveAttack([x, y]) {
+        if(this.board[x][y] == undefined) return false;
+        this.board[x][y].ship.hit()
+        return this.board[x][y].ship.timesHit;
+    }
 }
 
 module.exports = Gameboard;
