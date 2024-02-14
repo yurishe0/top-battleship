@@ -1,3 +1,5 @@
+import Ship from "./Ship";
+
 export class Gameboard {
     constructor() {
         this.board = new Array(10).fill(undefined).map(() => new Array(10).fill(undefined));
@@ -13,7 +15,8 @@ export class Gameboard {
         return false;
     }
 
-    placeShip(ship, x, y, direction) {
+    placeShip(shipLength, x, y, direction) {
+        const ship = new Ship(shipLength);
         if (this.#checkIfOutOfBounds(ship, x, y, direction)) return "out of bounds";
         for(let i = 0; i < ship.length; i++) {
             if (direction === "vertical") {
