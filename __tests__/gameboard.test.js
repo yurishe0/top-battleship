@@ -39,4 +39,9 @@ describe("gameboard tests", () => {
         testGameboard.receiveAttack([3, 5]);
         expect(testGameboard.receiveAttack([3, 4])).toEqual(3);
     })
+
+    it("should prevent from shooting an already shot position", () => {
+        testGameboard.receiveAttack([3, 3]);
+        expect(testGameboard.receiveAttack([3, 3])).toEqual('already shot');
+    })
 })

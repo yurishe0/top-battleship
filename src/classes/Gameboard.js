@@ -3,6 +3,8 @@ import Ship from "./Ship";
 export class Gameboard {
     constructor() {
         this.board = new Array(10).fill(undefined).map(() => new Array(10).fill(undefined));
+        this.hitShots = [];
+        this.missedShots = [];
     }
 
     #checkIfOutOfBounds(ship, x, y, direction) {
@@ -28,7 +30,11 @@ export class Gameboard {
     }
 
     receiveAttack([x, y]) {
-        if(this.board[x][y] == undefined) return false;
+        if (this.hitShots.includes([x, y]) || this.missedShots.includes([x, y])) return 'already shot';
+        if (this.board[x][y] == undefined) {
+            this.missedShots.push([x, y]);
+            return false;
+        }
         this.board[x][y].ship.hit()
         return this.board[x][y].ship.timesHit;
     }
