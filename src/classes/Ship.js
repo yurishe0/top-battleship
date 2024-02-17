@@ -23,6 +23,7 @@ export class Ship {
 
     hit() {
         this.timesHit += 1;
+        if (this.isSunk()) this.sunk = true;
     }
 
     isSunk() {

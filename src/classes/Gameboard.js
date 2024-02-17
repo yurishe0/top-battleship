@@ -3,6 +3,7 @@ import Ship from "./Ship";
 export class Gameboard {
     constructor() {
         this.board = new Array(10).fill(undefined).map(() => new Array(10).fill(undefined));
+        this.existingShips = [];
         this.hitShots = [];
         this.missedShots = [];
     }
@@ -27,16 +28,26 @@ export class Gameboard {
                 this.board[x + i][y] = {ship};
             }
         }
+        this.existingShips.push(ship);
     }
 
     receiveAttack([x, y]) {
-        if (this.hitShots.includes([x, y]) || this.missedShots.includes([x, y])) return 'already shot';
+        if (this.#checkIfShot([x, y])) return 'already shot';
+
         if (this.board[x][y] == undefined) {
             this.missedShots.push([x, y]);
             return false;
         }
-        this.board[x][y].ship.hit()
+
+        this.board[x][y].ship.hit();
+        this.hitShots.push([x, y]);
+        if (this.board[x][y].ship.sunk) this.existingShips = this.existingShips.filter(ship => ship !== this.board[x][y].ship);
         return this.board[x][y].ship.timesHit;
+    }
+
+    #checkIfShot([x, y]) {
+        return this.hitShots.some(arr => arr[0] === x && arr[1] === y) ||
+               this.missedShots.some(arr => arr[0] === x && arr[1] === y);
     }
 }
 

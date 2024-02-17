@@ -44,4 +44,13 @@ describe("gameboard tests", () => {
         testGameboard.receiveAttack([3, 3]);
         expect(testGameboard.receiveAttack([3, 3])).toEqual('already shot');
     })
+
+    it("should know when a ship is fully sunk", () => {
+        testGameboard.placeShip(3, 3, 3, "vertical");
+        testGameboard.receiveAttack([3, 3]);
+        testGameboard.receiveAttack([3, 4]);
+        testGameboard.receiveAttack([3, 5]);
+
+        expect(testGameboard.existingShips.length).toEqual(0);
+    })
 })
