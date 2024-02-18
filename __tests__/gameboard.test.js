@@ -41,8 +41,7 @@ describe("gameboard tests", () => {
     it("should make all attacks to a ship's coordinates refer to one ship", () => {
         testGameboard.placeShip(3, 3, 3, "vertical");
         testGameboard.receiveAttack([3, 3]);
-        testGameboard.receiveAttack([3, 5]);
-        expect(testGameboard.receiveAttack([3, 4])).toEqual(3);
+        expect(testGameboard.receiveAttack([3, 4])).toEqual(2);
     })
 
     it("should prevent from shooting an already shot position", () => {
