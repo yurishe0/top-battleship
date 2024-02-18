@@ -8,7 +8,7 @@ export class Gameboard {
         this.missedShots = [];
     }
 
-    #checkIfOutOfBounds(ship, x, y, direction) {
+    #isOutOfBounds(ship, x, y, direction) {
         if (x < 0 || y < 0 || x > 9 || y > 9) return true;
         for(let i = 0; i < ship.length; i++) {
             if (direction === "vertical") y++;
@@ -18,9 +18,30 @@ export class Gameboard {
         return false;
     }
 
+    #hasAdjacentShips(ship, x, y, direction) {
+        const offsets = [
+            [-1, 1], [0, 1], [1, 1],
+            [-1, 0], [0, 0], [1, 0],
+            [-1, -1], [0, -1], [1, -1]
+        ]
+
+        for(let i = 0; i < ship.length; i++) {
+            const [shipX, shipY] =  (direction === "vertical") ? [x, y + i] : [x + i, y];
+
+            for(const [offsetX, offsetY] of offsets) {
+                const adjacentX = shipX + offsetX;
+                const adjacentY = shipY + offsetY;
+
+                if (this.board[adjacentX][adjacentY] !== undefined) return true;
+            }
+        }
+        return false;
+    }
+
     placeShip(shipLength, x, y, direction) {
         const ship = new Ship(shipLength);
-        if (this.#checkIfOutOfBounds(ship, x, y, direction)) return "out of bounds";
+        if (this.#isOutOfBounds(ship, x, y, direction)) return "invalid";
+        if (this.#hasAdjacentShips(ship, x, y, direction)) return "invalid";
         for(let i = 0; i < ship.length; i++) {
             if (direction === "vertical") {
                 this.board[x][y + i] = {ship};
@@ -32,7 +53,7 @@ export class Gameboard {
     }
 
     receiveAttack([x, y]) {
-        if (this.#checkIfShot([x, y])) return 'already shot';
+        if (this.#checkIfShot([x, y])) return 'invalid';
 
         if (this.board[x][y] == undefined) {
             this.missedShots.push([x, y]);

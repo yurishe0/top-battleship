@@ -21,7 +21,12 @@ describe("gameboard tests", () => {
     })
 
     it("should prevent from placing out of bounds", () => {
-        expect(testGameboard.placeShip(3, 0, 8, "vertical")).toBe("out of bounds")
+        expect(testGameboard.placeShip(3, 0, 8, "vertical")).toBe("invalid")
+    })
+
+    it("should prevent from placing a ship adjacent to an existing ship", () => {
+        testGameboard.placeShip(3, 3, 3, "vertical");
+        expect(testGameboard.placeShip(3, 4, 4, "vertical")).toBe("invalid");
     })
 
     it("should receive an attack and send it to the correct ship", () => {
@@ -42,7 +47,7 @@ describe("gameboard tests", () => {
 
     it("should prevent from shooting an already shot position", () => {
         testGameboard.receiveAttack([3, 3]);
-        expect(testGameboard.receiveAttack([3, 3])).toEqual('already shot');
+        expect(testGameboard.receiveAttack([3, 3])).toEqual('invalid');
     })
 
     it("should know when a ship is fully sunk", () => {
