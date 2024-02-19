@@ -1,4 +1,4 @@
-const Player = require('../src/classes/Player.js');
+import Player from '../src/classes/Player.js';
 
 describe("test", () => {
     let testPlayer;

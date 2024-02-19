@@ -1,5 +1,4 @@
-const { experiments } = require('webpack');
-const Ship = require('../src/classes/Ship.js');
+import Ship from "../src/classes/Ship.js";
 
 describe("ship tests", () => {
     let testShip;

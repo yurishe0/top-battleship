@@ -1,5 +1,5 @@
-const Gameboard = require("../src/classes/Gameboard.js");
-const Ship = require("../src/classes/Ship.js");
+import Gameboard from "../src/classes/Gameboard.js";
+import Ship from "../src/classes/Ship.js";
 
 describe("gameboard tests", () => {
     let testGameboard;
