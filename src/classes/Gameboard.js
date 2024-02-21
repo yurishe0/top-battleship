@@ -50,6 +50,7 @@ export class Gameboard {
             }
         }
         this.existingShips.push(ship);
+        return true;
     }
 
     receiveAttack([x, y]) {
