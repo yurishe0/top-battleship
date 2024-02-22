@@ -14,7 +14,7 @@ export class Gameboard {
             if (direction === "vertical") y++;
             else x++;
         }
-        if (x > 9 || y > 9) return true;
+        if (x > 10 || y > 10) return true;
         return false;
     }
 
@@ -32,7 +32,9 @@ export class Gameboard {
                 const adjacentX = shipX + offsetX;
                 const adjacentY = shipY + offsetY;
 
-                if (this.board[adjacentX][adjacentY] !== undefined) return true;
+                if (adjacentX >= 0 && adjacentX <= 9 && adjacentY >= 0 && adjacentY <= 9) {
+                    if (this.board[adjacentX][adjacentY] !== undefined) return true;
+                }
             }
         }
         return false;
