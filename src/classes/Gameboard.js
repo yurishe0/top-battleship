@@ -67,7 +67,7 @@ export class Gameboard {
         this.hitShots.push([x, y]);
         if (this.board[x][y].ship.sunk) this.existingShips = this.existingShips.filter(ship => ship !== this.board[x][y].ship);
         if (this.existingShips.length === 0) return "no ships";
-        return this.board[x][y].ship.timesHit;
+        return true;
     }
 
     #checkIfShot([x, y]) {

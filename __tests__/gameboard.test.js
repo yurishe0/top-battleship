@@ -31,17 +31,11 @@ describe("gameboard tests", () => {
 
     it("should receive an attack and send it to the correct ship", () => {
         testGameboard.placeShip(3, 3, 3, "vertical");
-        expect(testGameboard.receiveAttack([3, 3])).toEqual(1);
+        expect(testGameboard.receiveAttack([3, 3])).toBe(true);
     })
     it("should be able to tell whether a shot was missed", () => {
         testGameboard.placeShip(3, 3, 3, "vertical");
         expect(testGameboard.receiveAttack([7, 7])).toEqual(false);
-    })
-
-    it("should make all attacks to a ship's coordinates refer to one ship", () => {
-        testGameboard.placeShip(3, 3, 3, "vertical");
-        testGameboard.receiveAttack([3, 3]);
-        expect(testGameboard.receiveAttack([3, 4])).toEqual(2);
     })
 
     it("should prevent from shooting an already shot position", () => {
