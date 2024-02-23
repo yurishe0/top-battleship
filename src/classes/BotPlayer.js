@@ -24,7 +24,11 @@ export class BotPlayer {
             const randomX = Math.floor(Math.random() * 10);
             const randomY = Math.floor(Math.random() * 10);
 
-            if (player.gameboard.receiveAttack([randomX, randomY]) === true) break;
+            if (player.gameboard.receiveAttack([randomX, randomY]) === true) {
+                this.turn = false;
+                player.turn = true;
+                break;
+            };
         }
     }
 }
