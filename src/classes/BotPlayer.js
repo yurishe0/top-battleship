@@ -9,13 +9,23 @@ export class BotPlayer {
     }
 
     placeRandom() {
+        if (this.availableShips.length === 0) return false;
         while(true) {
             const randomX = Math.floor(Math.random() * 10);
             const randomY = Math.floor(Math.random() * 10);
-            const direction = (randomX % 2 === 0) ? "vertical" : "horizontal";
-            if(this.gameboard.placeShip(this.availableShips[0], randomX, randomY, direction) === true) break;
+            const direction = (Math.round(Math.random() < 0.5)) ? "vertical" : "horizontal";
+            if (this.gameboard.placeShip(this.availableShips[0], randomX, randomY, direction) === true) break;
         }
         this.availableShips.shift();
+    }
+
+    shootRandom(player) {
+        while(true) {
+            const randomX = Math.floor(Math.random() * 10);
+            const randomY = Math.floor(Math.random() * 10);
+
+            if (player.gameboard.receiveAttack([randomX, randomY]) === true) break;
+        }
     }
 }
 
