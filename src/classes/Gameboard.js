@@ -1,6 +1,6 @@
 import Ship from "./Ship";
 
-export class Gameboard {
+export default class Gameboard {
     constructor() {
         this.board = new Array(10).fill(undefined).map(() => new Array(10).fill(undefined));
         this.existingShips = [];
@@ -75,5 +75,3 @@ export class Gameboard {
                this.missedShots.some(arr => arr[0] === x && arr[1] === y);
     }
 }
-
-module.exports = Gameboard;

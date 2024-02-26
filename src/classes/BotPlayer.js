@@ -1,6 +1,6 @@
 import Gameboard from "./Gameboard.js";
 
-export class BotPlayer {
+export default class BotPlayer {
     constructor() {
         this.gameboard = new Gameboard();
         this.name = "AI";
@@ -32,5 +32,3 @@ export class BotPlayer {
         }
     }
 }
-
-module.exports = BotPlayer;

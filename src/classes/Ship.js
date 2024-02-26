@@ -1,4 +1,4 @@
-export class Ship {
+export default class Ship {
     constructor(length) {
         this.length = length;
         this.timesHit = 0;
@@ -29,7 +29,4 @@ export class Ship {
     isSunk() {
         return (this.timesHit === this.length) ? true : false;
     }
-
 }
-
-module.exports = Ship;
