@@ -6,8 +6,8 @@ export default class DOM {
 
         const gameboardElement = document.createElement('div');
         gameboardElement.classList.add("gameboard");
-        for(let i = 10; i > 0; i--) {
-            for(let j = 1; j < 11; j++) {
+        for(let i = 9; i > 0; i--) {
+            for(let j = 0; j < 10; j++) {
                 const cell = document.createElement('div');
                 cell.classList.add("cell");
                 cell.setAttribute('x', j);
