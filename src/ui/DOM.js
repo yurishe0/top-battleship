@@ -29,6 +29,7 @@ export default class DOM {
 
         const gameboardElement = document.createElement('div');
         gameboardElement.classList.add("gameboard");
+        gameboardElement.setAttribute('id', player.name);
         for(let i = 9; i > 0; i--) {
             for(let j = 0; j < 10; j++) {
                 const cell = document.createElement('div');
@@ -41,5 +42,16 @@ export default class DOM {
         boardContainer.appendChild(playerName);
         boardContainer.appendChild(gameboardElement);
         main.appendChild(boardContainer);
+
+        this.displayShips(player);
+    }
+
+    static displayShips = (player) => {
+        player.gameboard.existingShips.forEach(ship => {
+            ship.coords.forEach(coord => {
+                const cell = document.querySelector(`#${player.name} [x="${coord[0]}"][y="${coord[1]}"]`);
+                cell.classList.add("ship");
+            })
+        })
     }
 }
