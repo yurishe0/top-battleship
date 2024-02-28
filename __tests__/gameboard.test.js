@@ -12,12 +12,19 @@ describe("gameboard tests", () => {
 
     it("should be able to place ships verticaly", () => {
         testGameboard.placeShip(3, 3, 3, "vertical");
+        testShip.coords = [[3, 3], [3, 4], [3, 5]];
         expect(testGameboard.board[3][3]).toEqual({ship: testShip});
     })
 
     it("should be able to place ships horizontally", () => {
         testGameboard.placeShip(3, 3, 3, "horizontal");
+        testShip.coords = [[3, 3], [4, 3], [5, 3]];
         expect(testGameboard.board[3][3]).toEqual({ship: testShip});
+    })
+
+    it("should correctly track it's own coorinates", () => {
+        testGameboard.placeShip(3, 3, 3, "vertical");
+        expect(testGameboard.board[3][3].ship.coords.length).toBe(3);
     })
 
     it("should prevent from placing out of bounds", () => {

@@ -4,6 +4,7 @@ export default class Ship {
         this.timesHit = 0;
         this.sunk = false;
         this.name = this.#asignName(length);
+        this.coords = [];
     }
 
     #asignName(length) {

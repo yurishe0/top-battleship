@@ -46,8 +46,10 @@ export default class Gameboard {
         if (this.#hasAdjacentShips(ship, x, y, direction)) return "invalid";
         for(let i = 0; i < ship.length; i++) {
             if (direction === "vertical") {
+                ship.coords.push([x, y + i]);
                 this.board[x][y + i] = {ship};
             } else {
+                ship.coords.push([x + i, y]);
                 this.board[x + i][y] = {ship};
             }
         }
