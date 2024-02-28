@@ -1,5 +1,25 @@
 export default class DOM {
+    static initializeSite = (root) => {
+        const header = document.createElement('div');
+        header.classList.add('header');
+        const h1 = document.createElement('h1');
+        h1.textContent = "Battleship";
+
+        const main = document.createElement('div');
+        main.setAttribute('id', 'main');
+
+        const footer = document.createElement('div');
+        const footerSpan = document.createElement('span');
+        footerSpan.textContent = "Crated by yurishe";
+
+        header.appendChild(h1);
+        footer.appendChild(footerSpan);
+
+        root.append(header, main, footer);
+    }
+
     static createGameboard = (player) => {
+        const main = document.querySelector('#main');
         const boardContainer = document.createElement('div');
         const playerName = document.createElement('span');
         playerName.textContent = player.name;
@@ -17,6 +37,6 @@ export default class DOM {
         }
         boardContainer.appendChild(playerName);
         boardContainer.appendChild(gameboardElement);
-        return boardContainer;
+        main.appendChild(boardContainer);
     }
 }

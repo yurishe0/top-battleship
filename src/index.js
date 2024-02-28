@@ -3,6 +3,7 @@ import BotPlayer from "./classes/BotPlayer";
 import DOM from "./ui/DOM";
 
 const root = document.querySelector("#root");
+DOM.initializeSite(root);
 
 const game = () => {
     const player1 = new Player("Test");
@@ -17,8 +18,8 @@ const game = () => {
         player2.placeRandom();
     }
 
-    root.appendChild(DOM.createGameboard(player1));
-    root.appendChild(DOM.createGameboard(player2));
+    DOM.createGameboard(player1);
+    DOM.createGameboard(player2);
 
 
     // while(!isGameOver(player1, player2)) {
