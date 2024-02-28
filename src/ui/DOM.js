@@ -21,7 +21,9 @@ export default class DOM {
     static createGameboard = (player) => {
         const main = document.querySelector('#main');
         const boardContainer = document.createElement('div');
+        boardContainer.classList.add("board-container");
         const playerName = document.createElement('span');
+        playerName.classList.add("player-name");
         playerName.textContent = player.name;
 
         const gameboardElement = document.createElement('div');

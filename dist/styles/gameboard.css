@@ -1,0 +1,27 @@
+#main {
+    display: flex;
+    justify-content: space-around;
+}
+
+.player-name {
+    display: block;
+    text-align: center;
+    color: white;
+    font-size: 36px;
+}
+
+.gameboard {
+    width: 500px;
+    height: 500px;
+
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+}
+
+.cell {
+    border: 1px solid white;
+    background-color: black;
+}
+
+
