@@ -1,7 +1,7 @@
 export default class DOM {
     static initializeSite = (root) => {
         const header = document.createElement('div');
-        header.classList.add('header');
+        header.setAttribute('id', 'header');
         const h1 = document.createElement('h1');
         h1.textContent = "Battleship";
 
@@ -9,6 +9,7 @@ export default class DOM {
         main.setAttribute('id', 'main');
 
         const footer = document.createElement('div');
+        footer.setAttribute('id', 'footer');
         const footerSpan = document.createElement('span');
         footerSpan.textContent = "Crated by yurishe";
 
