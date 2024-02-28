@@ -1,5 +1,5 @@
-import BotPlayer from "../src/classes/BotPlayer";
-import Player from "../src/classes/Player";
+import BotPlayer from "../src/classes/BotPlayer.js";
+import Player from "../src/classes/Player.js";
 
 describe("AI test", () => {
     let testBot;
