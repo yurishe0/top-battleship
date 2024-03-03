@@ -1,0 +1,5 @@
+#info-container {
+    width: 20%;
+    aspect-ratio: 1 / 1;
+    border: 2px dashed white;
+}

@@ -54,4 +54,11 @@ export default class DOM {
             })
         })
     }
+
+    static createInfoBoard = () => {
+        const main = document.querySelector('#main');
+        const infoContainer = document.createElement('div');
+        infoContainer.setAttribute('id', 'info-container');
+        main.append(infoContainer);
+    }
 }

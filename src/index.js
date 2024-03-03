@@ -19,6 +19,7 @@ const game = () => {
     }
 
     DOM.createGameboard(player1);
+    DOM.createInfoBoard();
     DOM.createGameboard(player2);
 
 
