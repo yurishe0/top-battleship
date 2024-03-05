@@ -63,7 +63,19 @@ export default class DOM {
     }
 
     static displayMessage = (title, message, type) => {
+        const infoContainer = document.querySelector("#info-container");
+        const messageContainer = document.createElement("div");
+        // message-info, message-error, message-success, message-failure
+        messageContainer.classList.add(type);
 
+        const h2 = document.createElement("h2");
+        h2.textContent = title;
+
+        const span = document.createElement("span");
+        span.textContent= message;
+
+        messageContainer.append(h2, span);
+        infoContainer.appendChild(messageContainer);
     }
 
     static applyEventListeners(player, callback) {
