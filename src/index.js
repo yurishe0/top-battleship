@@ -22,14 +22,18 @@ const game = async () => {
     DOM.createInfoBoard();
     DOM.createGameboard(player2);
 
+    DOM.displayMessage("Game begins!", `${player1.name} vs. ${player2.name}`, "message-info");
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     while(!isGameOver(player1, player2)) {
-        console.log(`Player's 1 turn: ${player1.turn}`);
         if (player1.turn === true) {
+            DOM.displayMessage(`${player1.name}'s turn`, 'Choose your attack...', "message-info")
             await handleAttack(player1, player2);
             player1.turn = false;
             player2.turn = true;
         } else {
+            DOM.displayMessage(`${player2.name}'s turn`, "The AI is making it's move.", "message-info")
+            await new Promise(resolve => setTimeout(resolve, 1000));
             await handleAttack(player2, player1);
             player1.turn = true;
             player2.turn = false;
@@ -42,14 +46,12 @@ const handleAttack = async (attackingPlayer, receivingPlayer) => {
         return new Promise(resolve => {
             DOM.applyEventListeners(receivingPlayer, async (x, y) => {
                 attackingPlayer.attack(receivingPlayer, [x, y]);
-                console.log(receivingPlayer.gameboard.hitShots);
                 resolve();
             });
             //remove event listeners
         })
     } else {
         attackingPlayer.shootRandom(receivingPlayer);
-        console.log(receivingPlayer.gameboard.hitShots);
     }
 }
 
