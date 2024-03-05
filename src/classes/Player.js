@@ -11,6 +11,8 @@ export default class Player {
         if (player.gameboard.receiveAttack(coordinates)) {
             this.turn = false;
             player.turn = true;
+            return true;
         };
+        return false
     }
 }
