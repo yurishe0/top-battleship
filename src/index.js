@@ -45,13 +45,15 @@ const handleAttack = async (attackingPlayer, receivingPlayer) => {
     if (attackingPlayer instanceof Player) {
         return new Promise(resolve => {
             DOM.applyEventListeners(receivingPlayer, async (x, y) => {
-                attackingPlayer.attack(receivingPlayer, [x, y]);
+                const attackHit = attackingPlayer.attack(receivingPlayer, [x, y]);
+                DOM.styleHit(receivingPlayer, [x, y], attackHit ? "hit" : "miss");
                 resolve();
             });
             //remove event listeners
         })
     } else {
-        attackingPlayer.shootRandom(receivingPlayer);
+        const attackHit = attackingPlayer.shootRandom(receivingPlayer);
+        DOM.styleHit(receivingPlayer, [attackHit[1][0], attackHit[1][1]], attackHit[0] ? "hit" : "miss");
     }
 }
 

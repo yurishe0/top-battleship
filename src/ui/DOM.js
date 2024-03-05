@@ -95,4 +95,9 @@ export default class DOM {
     static removeEventListeners(player) {
 
     }
+
+    static styleHit = (player, coordinates, type) => {
+        const cell = document.querySelector(`#${player.name} [x="${coordinates[0]}"][y="${coordinates[1]}"]`);
+        cell.classList.add(type);
+    }
 }
