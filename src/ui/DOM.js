@@ -64,6 +64,7 @@ export default class DOM {
 
     static displayMessage = (title, message, type) => {
         const infoContainer = document.querySelector("#info-container");
+        infoContainer.innerHTML = "";
         const messageContainer = document.createElement("div");
         // message-info, message-error, message-success, message-failure
         messageContainer.classList.add(type);
