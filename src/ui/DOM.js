@@ -61,4 +61,25 @@ export default class DOM {
         infoContainer.setAttribute('id', 'info-container');
         main.append(infoContainer);
     }
+
+    static displayMessage = (title, message, type) => {
+
+    }
+
+    static applyEventListeners(player, callback) {
+        const gameboard = document.querySelector(`#${player.name}`);
+        const cells = gameboard.children;
+        Array.from(cells).forEach((cell) => {
+            cell.addEventListener("click", (e) => {
+                const element = e.target;
+                const x = element.getAttribute('x');
+                const y = element.getAttribute('y');
+                callback(x, y);
+            });
+        });
+    }
+
+    static removeEventListeners(player) {
+
+    }
 }

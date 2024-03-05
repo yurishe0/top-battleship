@@ -5,7 +5,7 @@ import DOM from "./ui/DOM";
 const root = document.querySelector("#root");
 DOM.initializeSite(root);
 
-const game = () => {
+const game = async () => {
     const player1 = new Player("Test");
     player1.gameboard.placeShip(5, 3, 3, "vertical");
     player1.gameboard.placeShip(4, 1, 1, "horizontal");
@@ -23,9 +23,34 @@ const game = () => {
     DOM.createGameboard(player2);
 
 
-    // while(!isGameOver(player1, player2)) {
+    while(!isGameOver(player1, player2)) {
+        console.log(`Player's 1 turn: ${player1.turn}`);
+        if (player1.turn === true) {
+            await handleAttack(player1, player2);
+            player1.turn = false;
+            player2.turn = true;
+        } else {
+            await handleAttack(player2, player1);
+            player1.turn = true;
+            player2.turn = false;
+        }
+    }
+}
 
-    // }
+const handleAttack = async (attackingPlayer, receivingPlayer) => {
+    if (attackingPlayer instanceof Player) {
+        return new Promise(resolve => {
+            DOM.applyEventListeners(receivingPlayer, async (x, y) => {
+                attackingPlayer.attack(receivingPlayer, [x, y]);
+                console.log(receivingPlayer.gameboard.hitShots);
+                resolve();
+            });
+            //remove event listeners
+        })
+    } else {
+        attackingPlayer.shootRandom(receivingPlayer);
+        console.log(receivingPlayer.gameboard.hitShots);
+    }
 }
 
 const isGameOver = (player1, player2) => {
