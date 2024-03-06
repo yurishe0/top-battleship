@@ -25,15 +25,7 @@ export default class BotPlayer {
             const randomY = Math.floor(Math.random() * 10);
 
             const attackResult = player.gameboard.receiveAttack([randomX, randomY]);
-            if (attackResult === true) {
-                this.turn = false;
-                player.turn = true;
-                return [true, [randomX, randomY]];
-            } else if (attackResult === false) {
-                this.turn = false;
-                player.turn = true;
-                return [false, [randomX, randomY]];
-            }
+            return [attackResult, [randomX, randomY]];
         }
     }
 }
