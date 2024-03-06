@@ -46,6 +46,7 @@ const handleAttack = async (attackingPlayer, receivingPlayer) => {
         return new Promise(resolve => {
             DOM.applyEventListeners(receivingPlayer, async (x, y) => {
                 const attackHit = attackingPlayer.attack(receivingPlayer, [x, y]);
+                DOM.removeEventListeners(receivingPlayer);
                 DOM.styleHit(receivingPlayer, [x, y], attackHit ? "hit" : "miss");
                 if (attackHit) {
                     DOM.displayMessage("The attack was successful!", "A ship has been hit.", "message-success");

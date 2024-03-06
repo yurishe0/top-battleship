@@ -93,7 +93,12 @@ export default class DOM {
     }
 
     static removeEventListeners(player) {
-
+        const gameboard = document.querySelector(`#${player.name}`);
+        const cells = gameboard.children;
+        Array.from(cells).forEach((cell) => {
+            const clonedCell = cell.cloneNode(true);
+            cell.parentNode.replaceChild(clonedCell, cell);
+        });
     }
 
     static styleHit = (player, coordinates, type) => {
