@@ -28,15 +28,25 @@ const game = async () => {
     while(!isGameOver(player1, player2)) {
         if (player1.turn === true) {
             DOM.displayMessage(`${player1.name}'s turn`, 'Choose your attack...', "message-info")
-            await handleAttack(player1, player2);
-            player1.turn = false;
-            player2.turn = true;
+            const attackResult = await handleAttack(player1, player2);
+            if (attackResult === true || attackResult === "sunk") {
+                player1.turn = true;
+                player2.turn = false;
+            } else {
+                player1.turn = false;
+                player2.turn = true;
+            }
         } else {
             DOM.displayMessage(`${player2.name}'s turn`, "The AI is making it's move.", "message-info")
             await new Promise(resolve => setTimeout(resolve, 1000));
-            await handleAttack(player2, player1);
-            player1.turn = true;
-            player2.turn = false;
+            const attackResult = await handleAttack(player2, player1);
+            if (attackResult === true || attackResult === "sunk") {
+                player1.turn = false;
+                player2.turn = true;
+            } else {
+                player1.turn = true;
+                player2.turn = false;
+            }
         }
     }
     const winner = (player1.gameboard.existingShips.length === 0) ? player2.name : player1.name;
@@ -67,7 +77,6 @@ const handleAttack = async (attackingPlayer, receivingPlayer) => {
         })
     } else {
         const attackHit = attackingPlayer.shootRandom(receivingPlayer);
-        console.log(attackHit);
         DOM.styleHit(receivingPlayer, [attackHit[1][0], attackHit[1][1]], attackHit[0] ? "hit" : "miss");
         switch(attackHit[0]) {
             case "sunk":
@@ -81,6 +90,7 @@ const handleAttack = async (attackingPlayer, receivingPlayer) => {
                 break;
         }
         await new Promise(resolve => setTimeout(resolve, 1000));
+        return attackHit[0];
     }
 }
 
