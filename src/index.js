@@ -39,6 +39,8 @@ const game = async () => {
             player2.turn = false;
         }
     }
+    const winner = (player1.gameboard.existingShips.length === 0) ? player2.name : player1.name;
+    DOM.displayMessage("Game over!", `${winner} is the winner!`, "message-success");
 }
 
 const handleAttack = async (attackingPlayer, receivingPlayer) => {
