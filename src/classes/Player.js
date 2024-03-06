@@ -8,11 +8,6 @@ export default class Player {
     }
 
     attack(player, coordinates) {
-        if (player.gameboard.receiveAttack(coordinates)) {
-            this.turn = false;
-            player.turn = true;
-            return true;
-        };
-        return false
+        return player.gameboard.receiveAttack(coordinates);
     }
 }

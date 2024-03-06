@@ -67,7 +67,11 @@ export default class Gameboard {
 
         this.board[x][y].ship.hit();
         this.hitShots.push([x, y]);
-        if (this.board[x][y].ship.sunk) this.existingShips = this.existingShips.filter(ship => ship !== this.board[x][y].ship);
+        console.log(this.board[x][y].ship.sunk)
+        if (this.board[x][y].ship.sunk) {
+            this.existingShips = this.existingShips.filter(ship => ship !== this.board[x][y].ship);
+            return "sunk";
+        }
         if (this.existingShips.length === 0) return "no ships";
         return true;
     }

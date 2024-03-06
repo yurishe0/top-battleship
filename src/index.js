@@ -48,16 +48,20 @@ const handleAttack = async (attackingPlayer, receivingPlayer) => {
                 const attackHit = attackingPlayer.attack(receivingPlayer, [x, y]);
                 DOM.removeEventListeners(receivingPlayer);
                 DOM.styleHit(receivingPlayer, [x, y], attackHit ? "hit" : "miss");
-                if (attackHit) {
-                    DOM.displayMessage("The attack was successful!", "A ship has been hit.", "message-success");
-                    await new Promise(resolve => setTimeout(resolve, 1000));
-                } else {
-                    DOM.displayMessage("The attack was unsuccessful!", "It was a miss.", "message-failure");
-                    await new Promise(resolve => setTimeout(resolve, 1000));
+                switch(attackHit) {
+                    case "sunk":
+                        DOM.displayMessage("The attack was successful!", "The ship has been sunk.", "message-success");
+                        break;
+                    case true:
+                        DOM.displayMessage("The attack was successful!", "A ship has been hit.", "message-success");
+                        break;
+                    case false:
+                        DOM.displayMessage("The attack was unsuccessful!", "It was a miss.", "message-failure");
+                        break;
                 }
+                await new Promise(resolve => setTimeout(resolve, 1000));
                 resolve(attackHit);
             });
-            //remove event listeners
         })
     } else {
         const attackHit = attackingPlayer.shootRandom(receivingPlayer);
