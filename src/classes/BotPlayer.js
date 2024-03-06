@@ -25,6 +25,7 @@ export default class BotPlayer {
             const randomY = Math.floor(Math.random() * 10);
 
             const attackResult = player.gameboard.receiveAttack([randomX, randomY]);
+            if (attackResult[0] === "invalid") continue;
             return [attackResult, [randomX, randomY]];
         }
     }
