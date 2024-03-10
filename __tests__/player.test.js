@@ -7,7 +7,6 @@ describe("test", () => {
         testPlayer = new Player("Bob");
     })
 
-    // just a random test to showcase the test error
     it("should correctly create a player class", () => {
         expect(testPlayer.name).toBe("Bob");
     })
