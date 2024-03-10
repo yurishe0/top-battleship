@@ -24,7 +24,7 @@ export default class Game {
 
         for(let i = 0; i < player1.shipLengths.length; i++) {
             DOM.addHoverEffect(player1, player1.shipLengths[i], orientation);
-            DOM.displayMessage("Place your ships!", `Placing: length ${player1.shipLengths[i]}`, "info");
+            DOM.displayMessage("Place your ships!", `Right click to rotate. Placing: length ${player1.shipLengths[i]}`, "info");
             const result = await this.insertShip(player1, player1.shipLengths[i], orientation);
             if (result === 'invalid') {
                 i--;
