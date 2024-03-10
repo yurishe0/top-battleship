@@ -9,6 +9,7 @@ export default class Game {
         for(let i = 0; i < 5; i++) {
             player2.placeRandom();
         }
+
         DOM.createGameboard(player1);
         DOM.createInfoBoard();
         DOM.createGameboard(player2);
@@ -20,8 +21,15 @@ export default class Game {
             orientation.value = orientation.value === 'vertical' ? 'horizontal' : 'vertical';
         });
 
+
         for(let i = 0; i < player1.shipLengths.length; i++) {
-            await this.insertShip(player1, player1.shipLengths[i], orientation);
+            DOM.displayMessage("Place your ships!", `Placing: length ${player1.shipLengths[i]}`, "info");
+            const result = await this.insertShip(player1, player1.shipLengths[i], orientation);
+            if (result === 'invalid') {
+                i--;
+                DOM.displayMessage("Invalid placement!", "Attempted to place a ship out of bounds or near another ship.", "failure");
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            }
             DOM.displayShips(player1);
         }
 
@@ -60,9 +68,9 @@ export default class Game {
     static insertShip = (player, shipLength, orientation) => {
         return new Promise(resolve => {
             DOM.applyEventListeners(player, async (x, y) => {
-                console.log(shipLength, x, y, orientation)
-                player.gameboard.placeShip(shipLength, x, y, orientation.value);
+                const result = player.gameboard.placeShip(shipLength, x, y, orientation.value);
                 DOM.removeEventListeners(player);
+                if (result === 'invalid') resolve('invalid');
                 resolve();
             })
         })
