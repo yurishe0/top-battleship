@@ -43,7 +43,7 @@ export default class DOM {
         boardContainer.appendChild(gameboardElement);
         main.appendChild(boardContainer);
 
-        this.displayShips(player);
+        if(player.name != "AI") this.displayShips(player);
     }
 
     static displayShips = (player) => {
