@@ -4,7 +4,7 @@ import DOM from "../ui/DOM";
 
 export default class Game {
     static start = async () => {
-        const player1 = new Player("Test");
+        const player1 = new Player("Player");
         const player2 = new BotPlayer();
         for(let i = 0; i < 5; i++) {
             player2.placeRandom();
