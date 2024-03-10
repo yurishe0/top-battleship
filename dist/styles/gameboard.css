@@ -1,6 +1,8 @@
 #main {
     display: flex;
     justify-content: space-around;
+    align-items: center;
+    flex-grow: 1;
 }
 
 .player-name {
@@ -21,7 +23,20 @@
 
 .cell {
     border: 1px solid white;
-    background-color: black;
 }
 
+.ship {
+    background-color: #8aa5c2
+}
 
+.hit {
+    background-color: #ff3333
+}
+
+.miss {
+    background-color: #a0a0a0
+}
+
+.sunk {
+    background-color: #530505
+}
