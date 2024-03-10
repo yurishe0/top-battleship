@@ -5,6 +5,7 @@ export default class Player {
         this.gameboard = new Gameboard();
         this.name = name;
         this.turn = true;
+        this.shipLengths = [5, 4, 3, 3, 2];
     }
 
     attack(player, coordinates) {

@@ -5,20 +5,26 @@ import DOM from "../ui/DOM";
 export default class Game {
     static start = async () => {
         const player1 = new Player("Test");
-        player1.gameboard.placeShip(5, 3, 3, "vertical");
-        player1.gameboard.placeShip(4, 1, 1, "horizontal");
-        player1.gameboard.placeShip(3, 5, 4, "horizontal");
-        player1.gameboard.placeShip(3, 5, 6, "horizontal");
-        player1.gameboard.placeShip(2, 8, 8, "vertical");
-
         const player2 = new BotPlayer();
         for(let i = 0; i < 5; i++) {
             player2.placeRandom();
         }
-
         DOM.createGameboard(player1);
         DOM.createInfoBoard();
         DOM.createGameboard(player2);
+
+        const orientation = { value: 'vertical' };
+
+        document.body.addEventListener("contextmenu", (e) => {
+            e.preventDefault();
+            orientation.value = orientation.value === 'vertical' ? 'horizontal' : 'vertical';
+        });
+
+        for(let i = 0; i < player1.shipLengths.length; i++) {
+            await this.insertShip(player1, player1.shipLengths[i], orientation);
+            DOM.displayShips(player1);
+        }
+
 
         DOM.displayMessage("Game begins!", `${player1.name} vs. ${player2.name}`, "info");
         await new Promise(resolve => setTimeout(resolve, 1000));
@@ -49,6 +55,17 @@ export default class Game {
         }
         const winner = (player1.gameboard.existingShips.length === 0) ? player2.name : player1.name;
         DOM.displayMessage("Game over!", `${winner} is the winner!`, "success");
+    }
+
+    static insertShip = (player, shipLength, orientation) => {
+        return new Promise(resolve => {
+            DOM.applyEventListeners(player, async (x, y) => {
+                console.log(shipLength, x, y, orientation)
+                player.gameboard.placeShip(shipLength, x, y, orientation.value);
+                DOM.removeEventListeners(player);
+                resolve();
+            })
+        })
     }
 
     static #handleAttack = async (attackingPlayer, receivingPlayer) => {
