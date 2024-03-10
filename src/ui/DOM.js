@@ -147,4 +147,12 @@ export default class DOM {
             });
         });
     }
+
+    static addRestartButton = (cb) => {
+        const messageContainer = document.querySelector(".message");
+        const button = document.createElement("button");
+        button.textContent = "Restart";
+        button.addEventListener("click", cb);
+        messageContainer.appendChild(button);
+    }
 }

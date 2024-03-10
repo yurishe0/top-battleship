@@ -64,6 +64,7 @@ export default class Game {
         }
         const winner = (player1.gameboard.existingShips.length === 0) ? player2.name : player1.name;
         DOM.displayMessage("Game over!", `${winner} is the winner!`, "success");
+        DOM.addRestartButton(this.restartGame);
     }
 
     static insertShip = (player, shipLength, orientation) => {
@@ -133,5 +134,11 @@ export default class Game {
 
     static #isGameOver = (player1, player2) => {
         return (player1.gameboard.existingShips.length === 0 || player2.gameboard.existingShips.length === 0);
+    }
+
+    static restartGame = () => {
+        const main = document.querySelector("#main");
+        main.innerHTML = "";
+        this.start();
     }
 }
