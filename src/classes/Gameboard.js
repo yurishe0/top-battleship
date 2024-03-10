@@ -41,6 +41,8 @@ export default class Gameboard {
     }
 
     placeShip(shipLength, x, y, direction) {
+        x = Number(x);
+        y = Number(y);
         const ship = new Ship(shipLength);
         if (this.#isOutOfBounds(ship, x, y, direction)) return "invalid";
         if (this.#hasAdjacentShips(ship, x, y, direction)) return "invalid";
