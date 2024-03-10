@@ -106,4 +106,45 @@ export default class DOM {
         const cell = document.querySelector(`#${player.name} [x="${coordinates[0]}"][y="${coordinates[1]}"]`);
         cell.classList.add(type);
     }
+
+    static addHoverEffect = (player, shipLength, shipOrientation) => {
+        const gameboard = document.querySelector(`#${player.name}`);
+        const cells = gameboard.children;
+        let elements = []
+
+        const hoverEffect = (cell) => {
+            const x = Number(cell.getAttribute("x"));
+            const y = Number(cell.getAttribute("y"));
+
+                if (shipOrientation.value === "vertical") {
+                    for(let i = 0; i < shipLength; i++) {
+                        if (y + i <= 9) elements.push(document.querySelector(`[x="${x}"][y="${y + i}"]`));
+                    }
+                }
+                else {
+                    for(let i = 0; i < shipLength; i++) {
+                        if (x + i <= 9) elements.push(document.querySelector(`[x="${x + i}"][y="${y}"]`));
+                    }
+                }
+
+            elements.forEach((element) => element.classList.add("selecting"));
+        }
+
+        const clearEffect = () => {
+            elements.forEach((element) => element.classList.remove("selecting"));
+            elements = [];
+        }
+
+        Array.from(cells).forEach((cell) => {
+            cell.addEventListener("mouseover", () => {
+                hoverEffect(cell);
+            })
+            cell.addEventListener("mouseout", () => {
+                clearEffect(cell);
+            });
+            cell.addEventListener("click", () => {
+                clearEffect(cell);
+            });
+        });
+    }
 }
