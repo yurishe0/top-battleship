@@ -91,8 +91,8 @@ export default class Game {
                             resolve("invalid");
                             break;
                         case "sunk":
-                            DOM.displayMessage("The attack was successful!", "The ship has been sunk.", "success");
                             const sunkShip = receivingPlayer.gameboard.shipOnCoords([x, y]);
+                            DOM.displayMessage("The attack was successful!", `The ${sunkShip.name} has been sunk.`, "success");
                             sunkShip.coords.forEach((pair) => {
                                 DOM.styleHit(receivingPlayer, [pair[0], pair[1]], "sunk")
                             })
