@@ -25,7 +25,7 @@
     border: 1px solid white;
 }
 
-.ship {
+.ship, .selecting{
     background-color: #8aa5c2
 }
 
