@@ -41,7 +41,7 @@ export default class Game {
             if (player1.turn === true) {
                 DOM.displayMessage(`${player1.name}'s turn`, 'Choose your attack...', "info")
                 const attackResult = await this.#handleAttack(player1, player2);
-                if (attackResult === true || attackResult === "sunk") {
+                if (attackResult === true || attackResult === "sunk" || attackResult === "invalid") {
                     player1.turn = true;
                     player2.turn = false;
                 } else {
@@ -84,6 +84,11 @@ export default class Game {
                     DOM.removeEventListeners(receivingPlayer);
                     DOM.styleHit(receivingPlayer, [x, y], attackHit ? "hit" : "miss");
                     switch(attackHit) {
+                        case "invalid":
+                            DOM.displayMessage("The target was already shot.", "Pick another target.", "failure");
+                            await new Promise(resolve => setTimeout(resolve, 1000));
+                            resolve("invalid");
+                            break;
                         case "sunk":
                             DOM.displayMessage("The attack was successful!", "The ship has been sunk.", "success");
                             const sunkShip = receivingPlayer.gameboard.shipOnCoords([x, y]);
