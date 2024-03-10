@@ -67,7 +67,6 @@ export default class Gameboard {
 
         this.board[x][y].ship.hit();
         this.hitShots.push([x, y]);
-        console.log(this.board[x][y].ship.sunk)
         if (this.board[x][y].ship.sunk) {
             this.existingShips = this.existingShips.filter(ship => ship !== this.board[x][y].ship);
             return "sunk";
@@ -79,5 +78,9 @@ export default class Gameboard {
     #checkIfShot([x, y]) {
         return this.hitShots.some(arr => arr[0] === x && arr[1] === y) ||
                this.missedShots.some(arr => arr[0] === x && arr[1] === y);
+    }
+
+    shipOnCoords([x, y]) {
+        return this.board[x][y].ship;
     }
 }
