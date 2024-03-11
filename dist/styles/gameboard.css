@@ -13,8 +13,8 @@
 }
 
 .gameboard {
-    width: 500px;
-    height: 500px;
+    width: 25vw;
+    aspect-ratio: 1/1;
 
     display: grid;
     grid-template-columns: repeat(10, 1fr);
@@ -39,4 +39,25 @@
 
 .sunk {
     background-color: #530505
+}
+
+@media (max-width: 1299px) {
+    #main {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .gameboard {
+        width: 50vw;
+    }
+}
+
+@media (max-width: 500px) {
+    .gameboard {
+        width: 80vw;
+    }
+
+    #main {
+        gap: 20px;
+    }
 }
