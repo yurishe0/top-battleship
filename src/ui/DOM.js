@@ -11,9 +11,14 @@ export default class DOM {
         const footer = document.createElement('div');
         footer.setAttribute('id', 'footer');
         const footerSpan = document.createElement('span');
-        footerSpan.textContent = "Crated by yurishe";
+        footerSpan.textContent = "Created by ";
+        const footerLink = document.createElement("a");
+        footerLink.href = "https://github.com/yurishe0";
+        footerLink.target = "_blank";
+        footerLink.textContent = "yurishe";
 
         header.appendChild(h1);
+        footerSpan.appendChild(footerLink);
         footer.appendChild(footerSpan);
 
         root.append(header, main, footer);
