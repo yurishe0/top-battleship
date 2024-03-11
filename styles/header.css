@@ -1,0 +1,13 @@
+#header {
+    background-color: #111111;
+}
+
+h1 {
+    margin: 0px;
+    padding: 30px;
+    font-size: max(3vw, 20px);
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: 16px;
+    text-align: center;
+}

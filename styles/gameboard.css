@@ -1,0 +1,63 @@
+#main {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.player-name {
+    display: block;
+    text-align: center;
+    color: white;
+    font-size: 36px;
+}
+
+.gameboard {
+    width: 25vw;
+    aspect-ratio: 1/1;
+
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+}
+
+.cell {
+    border: 1px solid white;
+}
+
+.ship, .selecting{
+    background-color: #8aa5c2
+}
+
+.hit {
+    background-color: #ff3333
+}
+
+.miss {
+    background-color: #a0a0a0
+}
+
+.sunk {
+    background-color: #530505
+}
+
+@media (max-width: 1299px) {
+    #main {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .gameboard {
+        width: 50vw;
+    }
+}
+
+@media (max-width: 500px) {
+    .gameboard {
+        width: 80vw;
+    }
+
+    #main {
+        gap: 20px;
+    }
+}

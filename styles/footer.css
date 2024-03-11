@@ -1,0 +1,19 @@
+#footer {
+    height: 80px;
+    background-color: #111111;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#footer a {
+    color: gray;
+    text-decoration: none;
+}
+
+#footer a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
