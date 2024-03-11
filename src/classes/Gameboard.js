@@ -2,6 +2,7 @@ import Ship from "./Ship";
 
 export default class Gameboard {
     constructor() {
+        // Board is 0-indexed [0-9]
         this.board = new Array(10).fill(undefined).map(() => new Array(10).fill(undefined));
         this.existingShips = [];
         this.hitShots = [];
@@ -27,7 +28,7 @@ export default class Gameboard {
 
         for(let i = 0; i < ship.length; i++) {
             const [shipX, shipY] =  (direction === "vertical") ? [x, y + i] : [x + i, y];
-
+            // For each available offset position, calculate it and check whether it contains a ship - then return true
             for(const [offsetX, offsetY] of offsets) {
                 const adjacentX = shipX + offsetX;
                 const adjacentY = shipY + offsetY;

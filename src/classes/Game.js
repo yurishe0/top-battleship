@@ -14,14 +14,16 @@ export default class Game {
         DOM.createInfoBoard();
         DOM.createGameboard(player2);
 
+        // The orientation needs to be an object in order to pass it as a reference to an asynchronous function so that the function can get the actual and updated value
         const orientation = { value: 'vertical' };
 
+        // Listen for right click to change orientation
         document.body.addEventListener("contextmenu", (e) => {
             e.preventDefault();
             orientation.value = orientation.value === 'vertical' ? 'horizontal' : 'vertical';
         });
 
-
+        // 5 times (total number of ships) allow the player to click on the gameboard and place a ship (when it's invalid, reset the iteration)
         for(let i = 0; i < player1.shipLengths.length; i++) {
             DOM.addHoverEffect(player1, player1.shipLengths[i], orientation);
             DOM.displayMessage("Place your ships!", `Right click to rotate. Placing: length ${player1.shipLengths[i]}`, "info");
@@ -38,6 +40,10 @@ export default class Game {
         DOM.displayMessage("Game begins!", `${player1.name} vs. ${player2.name}`, "info");
         await new Promise(resolve => setTimeout(resolve, 1000));
 
+        /*
+            !MAIN GAME LOOP!
+            switches between turns (grants an additional turn if the attack was successful)
+        */
         while(!this.#isGameOver(player1, player2)) {
             if (player1.turn === true) {
                 DOM.displayMessage(`${player1.name}'s turn`, 'Choose your attack...', "info")
@@ -62,6 +68,7 @@ export default class Game {
                 }
             }
         }
+        // After the game is over
         const winner = (player1.gameboard.existingShips.length === 0) ? player2.name : player1.name;
         DOM.displayMessage("Game over!", `${winner} is the winner!`, "success");
         DOM.addRestartButton(this.restartGame);
@@ -80,6 +87,7 @@ export default class Game {
 
     static #handleAttack = async (attackingPlayer, receivingPlayer) => {
         if (attackingPlayer instanceof Player) {
+            // If the attacker is the player, add event listeners for a click on the enemy board, store it and display appropriate message
             return new Promise(resolve => {
                 DOM.applyEventListeners(receivingPlayer, async (x, y) => {
                     const attackHit = attackingPlayer.attack(receivingPlayer, [x, y]);
@@ -110,6 +118,8 @@ export default class Game {
                 });
             })
         } else {
+            // If the attacker is the bot, shoot at random and display appropriate message
+            // attackHit: [attackResult, [x, y]]
             const attackHit = attackingPlayer.shootRandom(receivingPlayer);
             DOM.styleHit(receivingPlayer, [attackHit[1][0], attackHit[1][1]], attackHit[0] ? "hit" : "miss");
             switch(attackHit[0]) {

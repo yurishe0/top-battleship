@@ -26,6 +26,7 @@ export default class BotPlayer {
 
             const attackResult = player.gameboard.receiveAttack([randomX, randomY]);
             if (attackResult === "invalid") continue;
+            // This return is a bit more complex than in the player's, because we don't get the shot's coordinates since it's random
             return [attackResult, [randomX, randomY]];
         }
     }
